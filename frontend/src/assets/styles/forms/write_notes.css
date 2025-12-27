@@ -1,0 +1,12 @@
+#addNote{
+   display: grid;
+   grid-template-columns: 0.06fr 1fr;
+}
+
+#addNote .sidebar{
+    border: transparent;
+    background-color: var(--bg-app);
+}
+#addNote .context{
+    background-color: var(--bg-soft);
+}

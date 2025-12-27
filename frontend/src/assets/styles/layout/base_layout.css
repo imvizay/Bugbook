@@ -1,0 +1,111 @@
+
+.layoutRoot {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  background: var(--bg-surface, #f6f5fb);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+
+.appArea {
+  display: grid;
+  grid-template-rows: 64px 1fr 36px;
+  background: var(--bg-app, #f6f5fb);
+}
+
+#header {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.75rem;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.logoTitle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.logoBug {
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: center;
+}
+
+.targetK {
+  position: relative;
+}
+
+.logoDot {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  border-radius: 50%;
+  background: #fafd27;
+}
+
+.logoTitle h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #220878;
+}
+
+.topActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ghostBtn {
+  background: transparent;
+  border: none;
+  padding: 0.45rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #39304A;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.ghostBtn:hover {
+  background: rgba(0,0,0,.06);
+}
+
+.ghostBtn:active {
+  transform: scale(0.95);
+}
+
+#main {
+  overflow: hidden;
+  background-color: #e3fcff;
+}
+
+#main > * {
+  min-height: calc(100vh - 100px);
+}
+
+#footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #7a748f;
+  background: transparent;
+}
+
+#main::-webkit-scrollbar {
+  width: 8px;
+}
+
+#main::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.15);
+  border-radius: 4px;
+}
