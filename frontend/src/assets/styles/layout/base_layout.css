@@ -109,3 +109,23 @@
   background: rgba(0,0,0,.15);
   border-radius: 4px;
 }
+
+
+
+
+
+
+
+
+/* MEDIA QUERY FOR MOBILE */
+
+@media (max-width:480px){
+   /* ---- Base layout ---- */
+  .appArea {
+    grid-template-rows: 56px 1fr 32px;
+  }
+
+  #header {
+    padding: 0 1rem;
+  }
+}

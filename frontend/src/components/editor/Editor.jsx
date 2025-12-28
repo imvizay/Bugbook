@@ -6,25 +6,25 @@ const LANGUAGE_MAP = {
   python: "python",
 }
 
-export default function CodeEditor({
-  language = "js",
-  value = "",
-  onChange,
-}) {
+export default function CodeEditor({language = "js",value = "",onChange}){
   return (
     <Editor
-      height="200px"
+      height="300px"
       language={LANGUAGE_MAP[language]}
       value={value}
-      theme="vs-light"
+      theme="vs-dark"
       options={{
         minimap: { enabled: false },
+        renderLineHighlight:'all',
         fontSize: 14,
         lineNumbers: "on",
         scrollBeyondLastLine: false,
         wordWrap: "on",
         automaticLayout: true,
         padding: { top: 8 },
+        cursorBlinking:"smooth",
+        smoothScrolling:true,
+        fontFamily: "Fira Code, monospace",
       }}
       onChange={(val) => onChange(val || "")}
     />

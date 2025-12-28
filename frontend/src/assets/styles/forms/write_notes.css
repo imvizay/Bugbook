@@ -1,12 +1,105 @@
-#addNote{
-   display: grid;
-   grid-template-columns: 0.06fr 1fr;
+/* Add Note Layout */
+#addNote {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  height: 100vh;
+  background: var(--bg-app);
+  overflow: hidden;
 }
 
-#addNote .sidebar{
-    border: transparent;
-    background-color: var(--bg-app);
+/* Sidebar */
+#addNote .sidebar {
+  background-color: var(--bg-app);
+  border-right: 1px solid rgba(0,0,0,0.08);
 }
-#addNote .context{
-    background-color: var(--bg-soft);
+
+/* Context */
+#addNote .context {
+  background-color: var(--bg-soft);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
+
+
+.context .topContext {
+  background: var(--bg-surface);
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+
+.context .topContext .noteType {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1.2rem;
+  overflow-x: auto;
+}
+
+/* active note */
+
+.context .topContext .noteType :nth-child(1) {
+    color: gray;
+    font-weight: 550;
+    font-size: 0.8rem;
+}
+.context .topContext .noteType > div {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.context .topContext .noteType > div:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.context .topContext .noteType > div :nth-child(1) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 50%;
+  color: var(--text-muted);
+}
+
+.context .topContext .noteType > div span {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* CENTER CONTEXT */
+.context .centerContext {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  height: 100%;
+  overflow: hidden;
+  min-height: 0;
+}
+
+
+.context .centerContext .centerLeft {
+  padding: 1rem 2rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.context .centerContext .centerRight {
+  padding: 1.5rem;
+  border-left: 1px solid rgba(0,0,0,0.08);
+  background: var(--bg-surface);
+  overflow-y: auto;
+  min-height: 0;
+}
+
