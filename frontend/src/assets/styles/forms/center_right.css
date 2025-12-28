@@ -1,0 +1,83 @@
+
+.wrapperRight {
+  background: var(--bg-soft);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.fieldBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldBlock label {
+  font-size: 14px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.fieldBlock label em{
+    color: red;
+}
+.fieldBlock label span {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.fieldBlock textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: white;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  line-height: 1.5;
+}
+
+.fieldBlock textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.fieldBlock small {
+  font-size: 12px;
+  color: var(--text-muted);
+  align-self: flex-end;
+}
+.fieldBlock.highlight textarea {
+  border-color: var(--primary);
+  background: rgba(34, 8, 120, 0.04);
+}
+
+
+/* CTA BUTTON */
+.ctaBox{
+    display: flex;
+    gap: 1em;
+}
+.ctaBox span{
+    border: 1px solid transparent;
+    font-size: 13px;
+    padding: 8px 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+}
+.ctaBox .add{
+    background-color: rgb(28, 17, 191);
+   
+}
+.ctaBox .draft{
+    background-color: gray;
+  
+}
+.ctaBox .clear{
+    background-color: red;
+   
+}

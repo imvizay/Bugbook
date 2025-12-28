@@ -1,0 +1,154 @@
+
+/* Left Panel wrapper */
+.wrapperLeft {
+  background: var(--bg-surface);
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  border-right: 1px solid rgba(0,0,0,0.06);
+}
+
+.wrapperLeft .language h1 {
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-main);
+}
+
+.wrapperLeft .language span {
+  font-size: 12px;
+  background: var(--primary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.wrapperLeft > div:not(.language) {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wrapperLeft span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.wrapperLeft select {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.wrapperLeft select:disabled {
+  background: var(--bg-soft);
+  cursor: not-allowed;
+}
+
+
+/* STATUS CHIPS */
+.status-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-options span {
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--bg-soft);
+}
+
+.status-options span:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.customTags {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Tags Design */
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Individual tag */
+.tagChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* Remove button */
+.removeTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 50%;
+}
+
+.removeTag:hover {
+  background: #e2e8f0;
+  color: #ef4444;
+}
+
+/* tag input */
+.tagInputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.tagInputRow input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5f5;
+  font-size: 14px;
+  outline: none;
+}
+
+.tagInputRow input:focus {
+  border-color: #6366f1;
+}
+
+/* Add button */
+.addTagBtn {
+  padding: 0 14px;
+  border-radius: 8px;
+  border: none;
+  background: #6366f1;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.addTagBtn:hover {
+  background: #4f46e5;
+}
