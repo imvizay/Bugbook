@@ -9,11 +9,12 @@ import { useTopic } from '../../../contexts/TopicContext'
 import { useTags } from '../../../hooks/Tag'
 import { X } from 'lucide-react'
 
-export default function CenterLeft({language,logoColor}) {
-
-  let [customSubTopic,setSubCustomTopic] = useState("")
-  let [selectedTopicId,setSelectedTopicId] = useState("js_basics")
-  let [tag,setTag] = useState("")
+export default function CenterLeft(
+  {language,logoColor,customSubTopic,setCustomSubTopic,
+    tag,setTag,selectedTopicId,setSelectedTopicId,
+    subTopic,setSubTopic
+  }
+){
 
   let { topicList ,addCustomTopic } = useTopic() // topic context
   let { tagList,addTag,removeTag } = useTags() // tag hook
@@ -54,7 +55,7 @@ export default function CenterLeft({language,logoColor}) {
 
         <div className='subTopic'>
           <span>Sub Topic</span>
-          <select disabled={!selectedTopicId}>
+          <select value={subTopic} onChange={(e)=>setSubTopic(e.target.value)} disabled={!selectedTopicId}>
             {selectedTopic?.subTopics?.map((sub,key)=>(
               <option key={key} value={sub}>{sub}</option>
             ))}
@@ -67,7 +68,7 @@ export default function CenterLeft({language,logoColor}) {
           <div className='status-options'>
             <input
              value={customSubTopic}
-             onChange = {(e)=>setSubCustomTopic(e.target.value)} 
+             onChange = {(e)=>setCustomSubTopic(e.target.value)} 
              type="text" placeholder="Name your topic" />
              
              <span 

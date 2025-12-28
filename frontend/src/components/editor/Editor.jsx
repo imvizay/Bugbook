@@ -1,19 +1,15 @@
 import Editor from "@monaco-editor/react"
 
-const LANGUAGE_MAP = {
-  js: "javascript",
-  cpp: "cpp",
-  python: "python",
-}
-
-export default function CodeEditor({language = "js",value = "",onChange}){
+export default function CodeEditor({language,value,onChange}){
   return (
     <Editor
       height="300px"
-      language={LANGUAGE_MAP[language]}
+      language={language}
       value={value}
       theme="vs-dark"
       options={{
+        fontLigatures:true,
+        tabSize:2,
         minimap: { enabled: false },
         renderLineHighlight:'all',
         fontSize: 14,
