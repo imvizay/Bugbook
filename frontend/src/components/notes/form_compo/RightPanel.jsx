@@ -7,7 +7,7 @@ import CodeEditor from '../../editor/Editor';
 import { useDraft } from '../../../hooks/noteDraft';
 
 
-function CenterRight({language,genericNote,setGenericNote}) {
+function CenterRight({language,genericNote,setGenericNote,saveNote}) {
 
     let handleGeneric=(e)=>{
         let {name,value}= e.target
@@ -79,7 +79,7 @@ function CenterRight({language,genericNote,setGenericNote}) {
       <div className='ctaButtons'>
 
             <div className='ctaBox'>
-                <span  className='add'>Add Note</span>
+                <span onClick={()=>saveNote()} className='add'>Add Note</span>
                 <span  className='draft'>Draft</span>
                 <span  className='clear'>Clear</span>
             </div>

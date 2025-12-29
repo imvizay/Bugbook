@@ -1,9 +1,10 @@
-import { useEffect,useState } from 'react'
 
 import '../../assets/styles/forms/write_notes.css'
 
-import { noteTypes } from '../../utils/write-note'
+import { useEffect,useState } from 'react'
+import axios from 'axios'
 
+import { noteTypes } from '../../utils/write-note'
 import NoteSideBar from './NoteSideBar'
 import CenterLeft from './form_compo/LeftPanel'
 import CenterRight from './form_compo/RightPanel'
@@ -73,12 +74,12 @@ export default function WriteNote() {
       tags : tagList, // tag array
       ...genericNote
     }
-    
+    console.log("Table",data)
     axios.post("http://127.0.0.1:8000/api/notes/",data)
 
     .then((res)=>console.log(res.data))
-    .catch((err)=>err.response.data)
-
+    .catch((error)=>console.log(error.response.data))
+    
   }
 
   return (
@@ -139,6 +140,9 @@ export default function WriteNote() {
                   language={language} 
                   genericNote={genericNote}
                   setGenericNote={setGenericNote}
+
+                  // API
+                  saveNote={saveNote}
                 />
             </div>
 

@@ -1,4 +1,4 @@
-import { color } from 'framer-motion'
+
 import { Lightbulb,Bug,TriangleAlert,GraduationCap,Wrench,BriefcaseBusiness,Zap } from 'lucide-react'
 
 export const noteTypes = [
