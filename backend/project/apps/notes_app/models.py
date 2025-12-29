@@ -120,7 +120,7 @@ class Note(models.Model):
     published_at = models.DateTimeField(null=True, blank=True)
     
     def __str__(self):
-        return f"{self.title} ({self.language.name} - {self.note_type.name})"
+        return f" {self.note_type.topic_name}"
 
 # ==================== NOTE DETAILS ====================
 
@@ -148,4 +148,4 @@ class CodeSnippet(models.Model):
     language = models.ForeignKey(ProgrammingLanguage,on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"{self.note.title} - {self.title}"
+        return self.note
