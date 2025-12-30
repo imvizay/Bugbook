@@ -1,59 +1,54 @@
-// Create Topic Edit Topic Delete Topic
-
-
-import { createContext,useContext } from "react";
-import { useState,useEffect } from "react";
-import { javascriptTopics } from "../utils/javascript-topics";
+import { createContext, useContext, useState } from "react";
 
 export const TopicContext = createContext();
 
-export const TopicProvider = ({children}) => {
+export const TopicProvider = ({ children }) => {
+  const [topicList, setTopicList] = useState([]);
 
-    let [topicList,setTopicList] = useState([]) // contains Primary Topic and Subtopic 
+  // add custom subtopic (frontend-only)
+  const addCustomTopic = (mainTopicId, customSubTopic) => {
+    if (!customSubTopic.trim()) return alert("Custom topic cannot be empty");
 
-    useEffect(()=>{
-        setTopicList(javascriptTopics)
-    },[])
+    setTopicList((prev) =>
+      prev.map((topic) =>
+        topic.id == mainTopicId
+          ? {
+              ...topic,
+              subtopics: [
+                ...(topic.subtopics || []),
+                {
+                  id: `custom-${Date.now()}`,
+                  sub_topic: customSubTopic,
+                  is_custom: true
+                }
+              ]
+            }
+          : topic
+      )
+    );
+  };
 
+  const createTopic = (topic) => {
+    setTopicList((prev) => [...prev, topic]);
+  };
 
-    const addCustomTopic = (mainTopicId,customSubTopic) => {
-        if(!customSubTopic.trim()){
-            return alert("custom topic cannot be emptu")
-        }
-        else if(customSubTopic.length < 5){
-            return alert("custom topic should have appropriate length")
-        }
-        // mutate topic state  
-        setTopicList( (prev) =>
-             prev.map((topic) => 
-                 topic.id == mainTopicId ? { ...topic, subTopics:[...topic.subTopics,customSubTopic] } : topic
-            )
-        )
-    }
+  const removeTopic = (topicId) => {
+    setTopicList((prev) => prev.filter((t) => t.id != topicId));
+  };
 
-    const createTopic = (topic) => {
-        setTopicList((prev)=>[...prev,topic])
-    } 
-    
-    const removeTopic = (topicId) => {
-        setTopicList( (prev) => 
-            prev.filter( (pt) => pt.id != topicId )
-        )
-    }
+  return (
+    <TopicContext.Provider
+      value={{
+        topicList,
+        setTopicList,
+        addCustomTopic,
+        createTopic,
+        removeTopic
+      }}
+    >
+      {children}
+    </TopicContext.Provider>
+  );
+};
 
-
-    return(
-        <>
-         <TopicContext.Provider 
-          value={ {topicList,addCustomTopic,removeTopic,createTopic} }
-         >
-          {children}
-         </TopicContext.Provider>
-        </>
-    )
-
-}
-
-export const useTopic = () => {
-    return useContext(TopicContext)
-}
+export const useTopic = () => useContext(TopicContext);

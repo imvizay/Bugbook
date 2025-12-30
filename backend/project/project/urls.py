@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from apps.bugbook.views import TopicSubtopicView,NoteCreateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/notes/',NoteCreateView.as_view(),name="notes"),
+    path('api/topic-subtopics/<str:language>',TopicSubtopicView.as_view(),name="topic-subtopics")
 ]

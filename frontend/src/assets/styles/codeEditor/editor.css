@@ -1,0 +1,54 @@
+.codeEditorShell {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  position: relative;
+  background: #0f172a;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  font-family: "Fira Code", monospace;
+}
+
+/* Line numbers */
+.lineNumbers {
+  background: #020617;
+  color: #64748b;
+  padding: 12px 8px;
+  text-align: right;
+  font-size: 13px;
+  line-height: 1.55;
+  user-select: none;
+}
+
+.lineNumbers span {
+  display: block;
+}
+
+/* Textarea */
+.codeEditorShell textarea {
+  background: transparent;
+  border: none;
+  color: #e5e7eb;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  resize: none;
+  outline: none;
+  min-height: 260px;
+  caret-color: #38bdf8;
+  tab-size: 2;
+}
+
+/* Placeholder */
+.codeEditorShell textarea::placeholder {
+  color: #64748b;
+}
+
+/* Footer */
+.editorFooter {
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+  font-size: 11px;
+  color: #94a3b8;
+}
