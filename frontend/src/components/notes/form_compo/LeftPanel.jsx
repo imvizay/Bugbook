@@ -3,64 +3,103 @@ import '../../../assets/styles/forms/center_left.css'
 
 import { pythonTopics } from '../../../utils/python-topics'
 // import { javascriptTopics } from '../../../utils/javascript-topics' //
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTopic } from '../../../contexts/TopicContext'
+import axios from 'axios'
 
 import { useTags } from '../../../hooks/Tag'
 import { X } from 'lucide-react'
 
 export default function CenterLeft(
-  {language,logoColor,customSubTopic,setCustomSubTopic,
-    tag,setTag,selectedTopicId,setSelectedTopicId,
-    subTopic,setSubTopic
+  {
+    language,
+    logoColor,
+    customSubTopic,
+    setCustomSubTopic,
+    tag,setTag,addTag,removeTag,tagList,setTagList,
+    selectedTopicId,setSelectedTopicId,
+    subTopic,setSubTopic,
+    setPrimeHeading,primeHeading
   }
 ){
 
-  let { topicList ,addCustomTopic } = useTopic() // topic context
-  let { tagList,addTag,removeTag } = useTags() // tag hook
+  let { topicList ,addCustomTopic,setTopicList } = useTopic() // topic context
 
   let selectedTopic = topicList.find((topic)=> topic.id == selectedTopicId)
 
+  useEffect(() => {
 
+    console.log("topic List",topicList[0])
+    if (!language) return;
+
+    axios
+      .get(`http://127.0.0.1:8000/api/topic-subtopics/${language.codeL}`)
+      .then((res) => {
+        setTopicList(res.data); 
+        setSelectedTopicId(""); 
+        setSubTopic("");
+      })
+      .catch((err) => console.error(err));
+  }, [language]);
 
   let selectTopic = (e) => {
         setSelectedTopicId(e.target.value)
   }
 
-  // onChange custom sub-topic field
+  // 
  
 
 
   return(
   <>
     <div className='wrapperLeft'>
+       
         <div className='language'>
           <h1>
-            {language.toUpperCase()}
+            {language?.codeL?.toUpperCase()}
             <span style={{backgroundColor:logoColor}}>
             {
-              language == "javascript" ? "Js" : language == "cpp" ? "Cpp" : "Py"
+              language?.codeL == "javascript" ? "Js" : language?.codeL == "cpp" ? "Cpp" : "Py"
             }
           </span> 
           </h1>
         </div>
+
+         <div>
+          <select value={primeHeading} onChange={(e)=>setPrimeHeading(e.target.value)} id="">
+            <option value={1}>Frontend</option>
+            <option value={2}>Backend</option>
+            <option value={3}>Database</option>
+            <option value={4}>Game Dev</option>
+          </select>
+        </div>
+
+
         <div className='topic'>
           <span>Topic</span>
-          <select onChange={selectTopic}> 
-            {topicList?.map((el)=>(
-              <option key={el.id} value={el.id}>{el.name}</option>
+          <select onChange={selectTopic} value={selectedTopicId}>
+            {topicList.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.topic_name}
+              </option>
             ))}
           </select>
         </div>
 
         <div className='subTopic'>
           <span>Sub Topic</span>
-          <select value={subTopic} onChange={(e)=>setSubTopic(e.target.value)} disabled={!selectedTopicId}>
-            {selectedTopic?.subTopics?.map((sub,key)=>(
-              <option key={key} value={sub}>{sub}</option>
+          <select
+            value={subTopic}
+            onChange={(e) => setSubTopic(e.target.value)}
+            disabled={!selectedTopic}
+          >
+            {selectedTopic?.subtopics?.map((sub) => (
+              <option key={sub.id} value={sub.sub_topic}>
+                {sub.sub_topic}
+              </option>
             ))}
-
           </select>
+          
         </div>
 
         <div className='status'>

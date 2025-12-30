@@ -7,22 +7,25 @@ import python from '../../assets/images/logos/python.png'
 import { useEffect, useState } from 'react'
 
 const logos = [
-  { id: 1,lang:"cpp", src: cpp, alt: 'C++' },
-  { id: 2,lang:"javascript", src: js, alt: 'JavaScript' },
-  { id: 3,lang:"python", src: python, alt: 'Python' },
+  { id: 3,lang:"cpp", src: cpp, alt: 'C++' },
+  { id: 1,lang:"javascript", src: js, alt: 'JavaScript' },
+  { id: 2,lang:"python", src: python, alt: 'Python' },
 ]
 
 export default function NoteSideBar({language,setLanguage}) {
   const [active, setActive] = useState(null)
 
   useEffect(()=>{
-        let active  = logos.find((obj)=> obj.lang === language)
+        let active  = logos.find((obj)=> obj.lang === language.codeL)
         setActive(active.id)
   },[])
 
-  let handleLanguage = (object) => {
-    setActive(object.id)  // status active
-    setLanguage(object.lang) // language
+  let handleLanguage = (langObj) => {
+    setActive(langObj.id)  // status active
+    setLanguage({
+      id:langObj.id,
+      codeL:langObj.lang
+    }) // language
   }
 
   return (
