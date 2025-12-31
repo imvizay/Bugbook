@@ -9,8 +9,6 @@ import NoteSideBar from './NoteSideBar'
 import CenterLeft from './form_compo/LeftPanel'
 import CenterRight from './form_compo/RightPanel'
 
-import { useTags } from '../../hooks/Tag'
-import { useTopic } from '../../contexts/TopicContext'
 
 export default function WriteNote() {
   // API ERROR
@@ -22,6 +20,8 @@ export default function WriteNote() {
     code:'',
     misconception:'',
   })
+
+  let [noteCreated,setNoteCreated] = useState(false)
 
   let [primeHeading,setPrimeHeading] = useState(1)
 
@@ -91,6 +91,7 @@ export default function WriteNote() {
   /* ====== EVENT HANDLERS ======= */
   // send post request
   let saveNote = () => {
+
     console.log("Started Saving")
 
     console.log("Reached")
@@ -112,17 +113,12 @@ export default function WriteNote() {
     }
 
     console.log("Table",data)
-    axios.post("http://127.0.0.1:8000/api/notes/",data,{
-      headers:{
-        Authorization:"vizay",
-        "Content-Type":"application/json"
-      }
-
-    })
+    axios.post("http://127.0.0.1:8000/api/notes/",data)
 
     .then((res)=>{
       console.log(res.data)
       localStorage.removeItem("tags")
+      setNoteCreated(true)
     })
     .catch((error)=>console.log(error.response.data))
     
@@ -203,8 +199,49 @@ export default function WriteNote() {
             
       </div>
     </section>
+          
+    { noteCreated && 
+    <>
+    <SuccessDialog onClose={()=>setNoteCreated((prev)=>!prev)}/>
+    </>}
+
         
     </>
 )
 
+}
+
+
+
+import { X, CheckCircle } from "lucide-react";
+import '../../assets/styles/api_success/success_note.css'
+
+export function SuccessDialog({ onClose }) {
+  return (
+    <div className="dialogBackdrop" onClick={onClose}>
+      <div
+        className="dialogBox"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close Button */}
+        <button className="dialogClose" onClick={onClose}>
+          <X size={18} />
+        </button>
+
+        {/* Icon */}
+        <div className="dialogIcon">
+          <CheckCircle size={48} />
+        </div>
+
+        {/* Content */}
+        <h3>Note Created Successfully</h3>
+        <p>Your note has been saved and is ready to use.</p>
+
+        {/* Action */}
+        <button className="dialogBtn" onClick={onClose}>
+          Done
+        </button>
+      </div>
+    </div>
+  );
 }

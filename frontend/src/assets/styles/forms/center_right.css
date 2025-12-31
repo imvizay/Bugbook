@@ -81,3 +81,43 @@
     background-color: red;
    
 }
+
+
+/* MEDIA QUERY */
+@media (max-width:360px){
+  .wrapperRight{
+    padding: 10px 0px;
+    margin-top: 35px;
+    margin-bottom: 55px;
+    width: 100%;
+  }
+  .wrapperRight .fieldBlock{
+    padding: 5px;
+  }
+  .wrapperRight .fieldBlock textarea{
+    padding: 0;
+    height: 130px;
+  }
+
+  .wrapperRight .fieldBlock textarea::placeholder{
+    padding: 2px 2px;
+  }
+  .ctaBox{
+    padding: 0 1rem;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .ctaBox .draft{
+    display: none;
+  }
+  .ctaBox .add{
+    background-color: rgb(44, 16, 168);
+    color: rgb(255, 255, 255);
+    letter-spacing: 1.2px;
+    font-weight: 520;
+  }
+  .ctaBox .clear{
+    font-weight: 520;
+    letter-spacing: 1.2px;
+  }
+}

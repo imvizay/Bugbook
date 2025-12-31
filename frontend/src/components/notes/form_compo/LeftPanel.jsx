@@ -65,7 +65,7 @@ export default function CenterLeft(
           </h1>
         </div>
 
-         <div>
+         <div className='chooseTopic'>
           <select value={primeHeading} onChange={(e)=>setPrimeHeading(e.target.value)} id="">
             <option value={1}>Frontend</option>
             <option value={2}>Backend</option>

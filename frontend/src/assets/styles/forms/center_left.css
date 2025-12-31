@@ -152,3 +152,31 @@
 .addTagBtn:hover {
   background: #4f46e5;
 }
+
+
+
+/* MEDIA QUERY */
+@media (max-width:360px){
+  .wrapperLeft{
+    padding: 10px 10px 0px 10px;
+    
+    gap: 10px;
+  }
+  .wrapperLeft .language h1,
+  .wrapperLeft .language span{
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .wrapperLeft select{
+    padding: 8px 5px;
+  }
+
+
+  /* custom tags */
+  .customTags .tagInputRow input{
+    flex: 0.8;
+    padding: 8px 5px ;
+  
+  }
+}
