@@ -4,11 +4,12 @@ import { Moon, User,Bug } from 'lucide-react'
 
 import gsap from "gsap"
 import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // import { SidebarSelection } from '../layouts/Sidebar'
 
 export default function BaseLayout() {
-
+  let navigate = useNavigate()
   let bugRef = useRef(null)
   let kRef = useRef(null)
 
@@ -85,7 +86,7 @@ export default function BaseLayout() {
         <header id="header">
           <div className="logoTitle">
             <span ref={bugRef} className="logoDot"> <Bug/> </span>
-            <h2>Bugboo<span ref={kRef}>k</span></h2>
+            <h2 onClick={()=>navigate("/")}>Bugboo<span ref={kRef}>k</span></h2>
           </div>
 
           <nav className="topActions">

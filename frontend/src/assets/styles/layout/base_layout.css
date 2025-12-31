@@ -119,13 +119,21 @@
 
 /* MEDIA QUERY FOR MOBILE */
 
-@media (max-width:480px){
+@media (max-width:360px){
    /* ---- Base layout ---- */
   .appArea {
     grid-template-rows: 56px 1fr 32px;
   }
 
   #header {
-    padding: 0 1rem;
+    padding: 0;
+    background-color: black;
+  }
+  #header .logoTitle h2{
+    color: white;
+    font-size: 16px;
+  }
+  #header .topActions button{
+    color: white;
   }
 }
