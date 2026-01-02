@@ -9,8 +9,6 @@ import NoteSideBar from './NoteSideBar'
 import CenterLeft from './form_compo/LeftPanel'
 import CenterRight from './form_compo/RightPanel'
 
-import { useTags } from '../../hooks/Tag'
-import { useTopic } from '../../contexts/TopicContext'
 
 export default function WriteNote() {
   // API ERROR
@@ -23,61 +21,105 @@ export default function WriteNote() {
     misconception:'',
   })
 
+  let [noteCreated,setNoteCreated] = useState(false)
+
+  let [primeHeading,setPrimeHeading] = useState(1)
+
   // top panel states
-  let [language,setLanguage] = useState("javascript")
+  let [language,setLanguage] = useState({id:1,codeL:"javascript"})
   let [subTopic,setSubTopic] = useState("")
-  let [noteType,setNoteType] = useState("Concept")
+  let [noteType,setNoteType] = useState(noteTypes[0])
   let [logoColor,setLogoColor] = useState("")
 
   // center left panel states
   let [customSubTopic,setCustomSubTopic] = useState("")
-  let [selectedTopicId,setSelectedTopicId] = useState("js_basics")
+  let [selectedTopicId,setSelectedTopicId] = useState(Number(1))
 
-  let { topicList } = useTopic()
+  // Tags
+  let [tagList, setTagList] = useState([])
   let [tag,setTag] = useState("")
 
   // right panel state
   let [genericNote,setGenericNote] = useState({
-    explanation:"",
-    code:"",
-    reasoning:"",
-    misconception:""
-  })
+      explanation:"",
+      code:"",
+      reasoning:"",
+      misconception:""
+    })
 
-  let {tagList} = useTags()
 
   /* ======  SIDE EFFECTS ======== */  
 
   useEffect(()=>{
-    let activeNote = noteTypes.find((obj)=>obj.type == noteType)
+    let activeNote = noteTypes.find((obj)=>obj.id == noteType.id)
     if(activeNote){
       setLogoColor(activeNote.color)
     }
     else{
       setLogoColor("")
     }
+  },[noteType])
 
-  },[noteType,noteTypes])
+
+  // TAGS HANDLERS
+  /* add tag */ 
+  let addTag = (tag) => {
+     if (!tag.trim()) return alert("Empty tag")
+     setTagList(prev => {
+       if (prev.includes(tag)) return prev
+       if (prev.length >= 4) {
+         alert("4 tags at max")
+         return prev
+       }
+     
+       let updated = [...prev, tag]
+       localStorage.setItem("tags", JSON.stringify(updated))
+       return updated
+     })
+  }   
+
+    // Remove Tag
+  let removeTag = (targetTag) => {
+    setTagList(prev => {
+      let updated = prev.filter(tag => tag !== targetTag)
+      localStorage.setItem("tags", JSON.stringify(updated))
+      return updated
+    })
+  }
+
 
   /* ====== EVENT HANDLERS ======= */
   // send post request
   let saveNote = () => {
-    let topic = topicList.find((topic)=>topic.id == selectedTopicId)
-    if(!topic) return {status:false , message:"cannot find topic during note request post"}
+
+    console.log("Started Saving")
+
+    console.log("Reached")
+    console.log("tagList type:", typeof tagList)
+    console.log("tagList value:", tagList)
+    console.log("is array?", Array.isArray(tagList))
+    
 
     let data = {
-      note_type : noteType,
-      lang : language.toLowerCase(),
-      topic : topic.name.toLowerCase(),
-      sub_topic : subTopic.toLowerCase(),
+      username:'vizay',
+      prime_heading:primeHeading,
+      note_type : Number(noteType.id),
+      language : language.id,
+      topic : Number(selectedTopicId),
+      sub_topic : Number(subTopic),
       custom_topic : customSubTopic,
       tags : tagList, // tag array
       ...genericNote
     }
+
     console.log("Table",data)
     axios.post("http://127.0.0.1:8000/api/notes/",data)
 
-    .then((res)=>console.log(res.data))
+    .then((res)=>{
+      console.log(res.data)
+      localStorage.removeItem("tags")
+      setNoteCreated(true)
+    })
     .catch((error)=>console.log(error.response.data))
     
   }
@@ -101,13 +143,13 @@ export default function WriteNote() {
 
                  {noteTypes?.map((el)=>(
                   <div 
-                    onClick={ () => setNoteType(el.type)} 
-                    style={ noteType == el.type ? { backgroundColor:el.color } : {} } 
+                    onClick={ () => setNoteType( {id:el.id, type:el.type})} 
+                    style={ noteType.type == el.type ? { backgroundColor:el.color } : {} } 
                     key={ el.id || el.type }> 
 
-                    {<el.icon color = { noteType==el.type ? "white": el.color } />} 
+                    {<el.icon color = { noteType.type ==el.type ? "white": el.color } />} 
 
-                    <span style = { noteType==el.type ? {color:"white"}:{} }> {el.type} </span>
+                    <span style = { noteType.type ==el.type ? {color:"white"}:{} }> {el.type} </span>
 
                    </div>
                  ))}
@@ -120,6 +162,8 @@ export default function WriteNote() {
 
             <div className='centerLeft'>
                   <CenterLeft 
+                    primeHeading={primeHeading}
+                    setPrimeHeading={setPrimeHeading}
                     language={language}
                     logoColor={logoColor}
                     subTopic={subTopic}
@@ -131,6 +175,11 @@ export default function WriteNote() {
                     setSelectedTopicId={setSelectedTopicId}
                     tag={tag}
                     setTag={setTag}
+
+                    tagList={tagList}
+                    setTagList={setTagList}
+                    addTag={addTag}
+                    removeTag={removeTag}
                   
                   />
             </div>
@@ -150,8 +199,49 @@ export default function WriteNote() {
             
       </div>
     </section>
+          
+    { noteCreated && 
+    <>
+    <SuccessDialog onClose={()=>setNoteCreated((prev)=>!prev)}/>
+    </>}
+
         
     </>
 )
+
 }
 
+
+
+import { X, CheckCircle } from "lucide-react";
+import '../../assets/styles/api_success/success_note.css'
+
+export function SuccessDialog({ onClose }) {
+  return (
+    <div className="dialogBackdrop" onClick={onClose}>
+      <div
+        className="dialogBox"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close Button */}
+        <button className="dialogClose" onClick={onClose}>
+          <X size={18} />
+        </button>
+
+        {/* Icon */}
+        <div className="dialogIcon">
+          <CheckCircle size={48} />
+        </div>
+
+        {/* Content */}
+        <h3>Note Created Successfully</h3>
+        <p>Your note has been saved and is ready to use.</p>
+
+        {/* Action */}
+        <button className="dialogBtn" onClick={onClose}>
+          Done
+        </button>
+      </div>
+    </div>
+  );
+}

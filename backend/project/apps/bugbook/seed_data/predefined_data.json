@@ -1,0 +1,175 @@
+{
+    "programming_languages": [
+    {"language_name": "javascript"},
+    {"language_name": "python"},
+    {"language_name": "cpp"},
+    {"language_name": "react"},
+    {"language_name": "unity"},
+    {"language_name": "sql"},
+    {"language_name": "html_css"},
+    {"language_name": "github"}
+  ],
+  
+  "note_types": [
+    {"note_type": "concept"},
+    {"note_type": "bug"},
+    {"note_type": "learning"},
+    {"note_type": "mistake"},
+    {"note_type": "project_issue"},
+    {"note_type": "interview_insight"},
+    {"note_type": "optimization"},
+    {"note_type": "cheatsheet"},
+    {"note_type": "algorithm"}
+  ],
+  
+  "tags": [
+    {"tag_name": "frontend","created_by":null},
+    {"tag_name": "backend", "created_by": null},
+    {"tag_name": "database", "created_by": null},
+    {"tag_name": "api", "created_by": null},
+    {"tag_name": "authentication", "created_by": null},
+    {"tag_name": "security", "created_by": null},
+    {"tag_name": "performance", "created_by": null},
+    {"tag_name": "debugging", "created_by": null},
+    {"tag_name": "testing", "created_by": null},
+    {"tag_name": "deployment", "created_by": null},
+    {"tag_name": "react-hooks", "created_by": null},
+    {"tag_name": "django", "created_by": null},
+    {"tag_name": "nodejs", "created_by": null},
+    {"tag_name": "git", "created_by": null},
+    {"tag_name": "docker", "created_by": null}
+  ],
+  
+  "topic_categories": [
+    {"primary_topic": "frontend"},
+    {"primary_topic": "backend"},
+    {"primary_topic": "database"},
+    {"primary_topic": "game_dev"}
+  ],
+  
+  "main_topics": [
+    {
+      "topic_name": "React Hooks",
+      "category": "frontend",
+      "languages": ["react", "javascript"]
+    },
+    {
+      "topic_name": "Django Models",
+      "category": "backend",
+      "languages": ["python"]
+    },
+    {
+      "topic_name": "JavaScript ES6+",
+      "category": "frontend",
+      "languages": ["javascript"]
+    },
+    {
+      "topic_name": "Python Decorators",
+      "category": "backend",
+      "languages": ["python"]
+    },
+    {
+      "topic_name": "SQL Queries",
+      "category": "database",
+      "languages": ["sql"]
+    },
+    {
+      "topic_name": "Git Commands",
+      "category": "backend",
+      "languages": ["github"]
+    },
+    {
+      "topic_name": "C# Unity Scripting",
+      "category": "game_dev",
+      "languages": ["csharp", "unity"]
+    },
+    {
+      "topic_name": "HTML/CSS Layouts",
+      "category": "frontend",
+      "languages": ["html_css"]
+    },
+    {
+      "topic_name": "Node.js APIs",
+      "category": "backend",
+      "languages": ["javascript"]
+    },
+    {
+      "topic_name": "Java Spring Boot",
+      "category": "backend",
+      "languages": ["java"]
+    }
+  ],
+  
+  "subtopics": [
+    {
+      "sub_topic": "useState",
+      "topic_name": "React Hooks",
+      "order": 1
+    },
+    {
+      "sub_topic": "useEffect",
+      "topic_name": "React Hooks",
+      "order": 2
+    },
+    {
+      "sub_topic": "useContext",
+      "topic_name": "React Hooks",
+      "order": 3
+    },
+    {
+      "sub_topic": "Model Fields",
+      "topic_name": "Django Models",
+      "order": 1
+    },
+    {
+      "sub_topic": "Model Relationships",
+      "topic_name": "Django Models",
+      "order": 2
+    },
+    {
+      "sub_topic": "Arrow Functions",
+      "topic_name": "JavaScript ES6+",
+      "order": 1
+    },
+    {
+      "sub_topic": "Destructuring",
+      "topic_name": "JavaScript ES6+",
+      "order": 2
+    },
+    {
+      "sub_topic": "Promises/Async",
+      "topic_name": "JavaScript ES6+",
+      "order": 3
+    },
+    {
+      "sub_topic": "Function Decorators",
+      "topic_name": "Python Decorators",
+      "order": 1
+    },
+    {
+      "sub_topic": "Class Decorators",
+      "topic_name": "Python Decorators",
+      "order": 2
+    },
+    {
+      "sub_topic": "SELECT Queries",
+      "topic_name": "SQL Queries",
+      "order": 1
+    },
+    {
+      "sub_topic": "JOIN Operations",
+      "topic_name": "SQL Queries",
+      "order": 2
+    },
+    {
+      "sub_topic": "Basic Commands",
+      "topic_name": "Git Commands",
+      "order": 1
+    },
+    {
+      "sub_topic": "Branch Management",
+      "topic_name": "Git Commands",
+      "order": 2
+    }
+  ]
+}

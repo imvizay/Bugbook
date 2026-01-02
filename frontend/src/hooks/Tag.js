@@ -1,31 +1,36 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export function useTags(initialTags = []) {
-  const [tagList, setTagList] = useState(initialTags)
+export function useTags() {
+  const [tagList, setTagList] = useState([])
 
+ 
+    
   // Add Tag
   const addTag = (tag) => {
-    if (!tag.trim()) {
-      alert("Empty tag")
-      return
-    }
+     if (!tag.trim()) return alert("Empty tag")
 
-    if(tagList.length > 3) {
-      return alert("4 tags at max can be linked to a topic")
-    }
-
-    setTagList(prev => {
-      if (prev.includes(tag)) return prev // prevent duplicate tag
-      return [...prev, tag]
-    })
-  }
+     setTagList(prev => {
+       if (prev.includes(tag)) return prev
+       if (prev.length >= 4) {
+         alert("4 tags at max")
+         return prev
+       }
+     
+       const updated = [...prev, tag]
+       localStorage.setItem("tags", JSON.stringify(updated))
+       return updated
+     })
+  }   
 
   // Remove Tag
   const removeTag = (targetTag) => {
-    setTagList(prev =>
-      prev.filter(tag => tag !== targetTag)
-    )
+    setTagList(prev => {
+      const updated = prev.filter(tag => tag !== targetTag)
+      localStorage.setItem("tags", JSON.stringify(updated))
+      return updated
+    })
   }
+
 
   return {
     tagList,
