@@ -1,0 +1,72 @@
+/* Wrapper */
+.ud_wrapper {
+  background: var(--bg-soft);
+  min-height: 100vh;
+  padding: 28px;
+}
+
+/* Main Layout */
+.ud_midSection {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* Sidebar */
+.ud_left {
+  position: sticky;
+  top: 28px;
+  height: fit-content;
+}
+
+/* Right Content */
+.ud_right {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Header */
+.ud_header h1 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ud_header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Content */
+.ud_content {
+  margin-top: 8px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .ud_midSection {
+    grid-template-columns: 1fr;
+  }
+
+  .ud_left {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .ud_wrapper {
+    padding: 14px;
+  }
+
+  .ud_right {
+    padding: 16px;
+  }
+}

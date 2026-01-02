@@ -1,13 +1,18 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   /* Brand */
-  --primary: #3B2ED0;     /* deep indigo */
+  --primary: #3B2ED0;   
   --secondary: #6D5AE6;
-  --accent: #F97316;     /* controlled highlight */
+  --accent: #F97316;    
 
   /* Backgrounds */
-  --bg-app: #F5F6FA;     /* app canvas */
-  --bg-surface: #FFFFFF; /* cards, editor */
-  --bg-soft: #EEF0F7;    /* side panels */
+  --bg-app: #F5F6FA;  
+  --bg-surface: #FFFFFF; 
+  --bg-soft: #EEF0F7;  
 
   /* Text */
   --text-main: #1F2937;
