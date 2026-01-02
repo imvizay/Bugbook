@@ -9,6 +9,10 @@
 
 /* Sidebar */
 #addNote .sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55%;
   background-color: var(--bg-app);
   border-right: 1px solid rgba(0,0,0,0.08);
 }

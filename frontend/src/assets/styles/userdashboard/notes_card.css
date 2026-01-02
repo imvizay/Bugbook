@@ -1,0 +1,118 @@
+.userNoteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.noteCard {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: 0.25s ease;
+  align-self: start;
+}
+
+.noteCard:hover {
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+/* Header */
+.noteHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.noteTitle {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.noteSub {
+  font-size: 12px;
+  color: #777;
+}
+
+.noteCategory {
+  font-size: 11px;
+  padding: 4px 10px;
+  background: #eef2ff;
+  color: #3730a3;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Meta */
+.noteMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #555;
+}
+
+.noteMeta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Expand */
+.expandBtn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #2d2cff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.expandBtn svg {
+  transition: transform 0.2s ease;
+}
+
+.expandBtn svg.rotate {
+  transform: rotate(180deg);
+}
+
+/* Details */
+.noteDetails {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.noteDetails strong {
+  font-size: 12px;
+  color: #111;
+}
+
+.noteDetails p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Footer */
+.noteFooter {
+  margin-top: auto;
+  font-size: 12px;
+  color: #888;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

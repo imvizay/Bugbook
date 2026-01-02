@@ -90,7 +90,7 @@ export default function BaseLayout() {
 
           <nav className="topActions">
             <button className="ghostBtn"><Moon size={18} /></button>
-            <button className="ghostBtn"><User size={18} /></button>
+            <button onClick={()=>navigate("my-dashboard")} className="ghostBtn"><User size={18} /></button>
           </nav>
         </header>
 
