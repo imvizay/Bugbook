@@ -173,3 +173,51 @@ class NoteResponseSerializer(serializers.ModelSerializer):
             "tags",
             "created_at",
         ]
+
+
+class LanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+            model = ProgrammingLanguage
+            fields = '__all__'    
+
+
+
+from .models import Note
+from .models import CodeSnippet
+from rest_framework import serializers
+from .models import GenericDetails
+
+class GenericDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GenericDetails
+        fields = [
+            "id",
+            "note_explanation",
+            "note_reasoning",
+            "note_misconception",
+        ]
+
+class CodeSnippetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CodeSnippet
+        fields = ["id", "code", "language"]
+
+
+class NoteDetailSerializer(serializers.ModelSerializer):
+    sections = GenericDetailsSerializer(many=True, read_only=True)
+    code_snippets = CodeSnippetSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Note
+        fields = [
+            "id",
+            "language",
+            "note_type",
+            "main_topic",
+            "sub_topic",
+            "custom_subtopic",
+            "tags",
+            "sections",
+            "code_snippets",
+            "created_at",
+        ]

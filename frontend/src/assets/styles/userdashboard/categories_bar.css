@@ -1,0 +1,52 @@
+.categoriesBar {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #444;
+}
+
+.filterHeader h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* List */
+.filterList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1px;
+}
+
+.filterList .activeCategory{
+  background-color: rgb(169, 18, 78);
+  color: white;
+}
+
+.filterList span{
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+}
+.filterList span:not(.activeCategory):hover{
+  background-color: #8aafdb;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
