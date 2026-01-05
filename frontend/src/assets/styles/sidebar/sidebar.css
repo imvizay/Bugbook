@@ -1,11 +1,9 @@
 .sidebarSelection {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100%;
+  justify-content: center;
   gap: 14px;
-
 }
 
 .sidebarIcon {
