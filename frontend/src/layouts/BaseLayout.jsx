@@ -1,12 +1,11 @@
 import '../assets/styles/layout/base_layout.css'
 import { Outlet } from "react-router-dom"
-import { Moon, User,Bug } from 'lucide-react'
+import { Moon, User,Bug,LogIn } from 'lucide-react'
 
 import gsap from "gsap"
 import { useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 
-// import { SidebarSelection } from '../layouts/Sidebar'
 
 export default function BaseLayout() {
   let navigate = useNavigate()
@@ -32,9 +31,6 @@ export default function BaseLayout() {
   })
 
   tl
-    /* -------------------------
-       PHASE 1: FACE RIGHT
-    ------------------------- */
     .set(bug, {
       x: 0,
       y: 0,
@@ -47,25 +43,16 @@ export default function BaseLayout() {
       duration: 2
     })
 
-    /* -------------------------
-       PHASE 2: WALK TO "k"
-    ------------------------- */
     .to(bug, {
       x: walkX,
       duration: 2.5
     })
 
-    /* -------------------------
-       PHASE 3: FACE UP
-    ------------------------- */
     .to(bug, {
       rotate: 0,
       duration: 0.4
     })
 
-    /* -------------------------
-       PHASE 4: CLIMB UP
-    ------------------------- */
     .to(bug, {
       y: climbY,
       scale: 0.9,
@@ -91,6 +78,7 @@ export default function BaseLayout() {
 
           <nav className="topActions">
             <button className="ghostBtn"><Moon size={18} /></button>
+            <Link to="login-acc"><span><LogIn/></span></Link>
             <button onClick={()=>navigate("my-dashboard")} className="ghostBtn"><User size={18} /></button>
           </nav>
         </header>

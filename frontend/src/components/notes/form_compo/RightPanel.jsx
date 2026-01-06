@@ -1,13 +1,11 @@
-import {useState} from 'react';
+
 import '../../../assets/styles/forms/center_right.css'
 
 import { CodeXml , BookOpen , Brain , Bug} from 'lucide-react'
-import CodeEditor from '../../editor/Editor';
-
-import { useDraft } from '../../../hooks/noteDraft';
+import CodeEditor from '../../editor/Editor'
 
 
-function CenterRight({language,genericNote,setGenericNote,saveNote}) {
+function CenterRight({language,genericNote,setGenericNote,saveNote,isEditMode}) {
 
     let handleGeneric=(e)=>{
         let {name,value}= e.target
@@ -20,6 +18,19 @@ function CenterRight({language,genericNote,setGenericNote,saveNote}) {
 
   return (
     <div className="wrapperRight">
+  
+      {/* User Defined Title */}
+      <div className='fieldBlock'>
+        <label>Title</label>
+        <input type="text" className='title' placeholder="Title" value={genericNote.title}
+          onChange={(e) =>
+            setGenericNote(prev => ({
+              ...prev,
+              title: e.target.value
+            }))
+         }/>
+
+      </div>
 
       {/* Explanation */}
       <div className="fieldBlock">
@@ -79,7 +90,9 @@ function CenterRight({language,genericNote,setGenericNote,saveNote}) {
       <div className='ctaButtons'>
 
             <div className='ctaBox'>
-                <span onClick={()=>saveNote()} className='add'>Add Note</span>
+                <span onClick={()=>saveNote()} className='add'> 
+                  {isEditMode ? "Update Note" : "Save Note"}
+                </span>
                 <span  className='draft'>Draft</span>
                 <span  className='clear'>Clear</span>
             </div>
@@ -87,7 +100,7 @@ function CenterRight({language,genericNote,setGenericNote,saveNote}) {
       </div>
 
     </div>
-  );
+  )
 }
 
-export default CenterRight;
+export default CenterRight

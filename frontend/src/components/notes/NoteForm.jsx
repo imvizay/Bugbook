@@ -9,17 +9,14 @@ import NoteSideBar from './NoteSideBar'
 import CenterLeft from './form_compo/LeftPanel'
 import CenterRight from './form_compo/RightPanel'
 
+import { useLocation } from 'react-router-dom'
 
 export default function WriteNote() {
   // API ERROR
-  let [apiError,setError] = useState({
-    language:"",
-    custom_note:'',
-    explanation:'',
-    reasoning:'',
-    code:'',
-    misconception:'',
-  })
+  const location = useLocation();
+
+  const isEditMode = location.state?.mode === "edit";
+  const editNote = location.state?.note;
 
   let [noteCreated,setNoteCreated] = useState(false)
 
@@ -41,6 +38,7 @@ export default function WriteNote() {
 
   // right panel state
   let [genericNote,setGenericNote] = useState({
+      title:"",
       explanation:"",
       code:"",
       reasoning:"",
@@ -49,6 +47,43 @@ export default function WriteNote() {
 
 
   /* ======  SIDE EFFECTS ======== */  
+
+  useEffect(() => {
+  if (!isEditMode || !editNote) return
+
+  // Top panel
+  setLanguage({
+    id: editNote.language.id,
+    codeL: editNote.language.language_name,
+  });
+
+  setNoteType({
+    id: editNote.note_type.id,
+    type: editNote.note_type.note_type,
+  });
+
+  setLogoColor(editNote.note_type.color || "");
+
+  // Topics
+  setSelectedTopicId(editNote.main_topic?.id || 1);
+  setSubTopic(editNote.sub_topic || "");
+  setCustomSubTopic(editNote.custom_subtopic || "");
+
+  // Tags
+  setTagList(editNote.tags?.map(t => t.tag_name) || []);
+
+  // Right panel (main content)
+  setGenericNote({
+      title: editNote.title || "",
+      explanation: editNote.sections?.[0]?.note_explanation || "",
+      reasoning: editNote.sections?.[0]?.note_reasoning || "",
+      misconception: editNote.sections?.[0]?.note_misconception || "",
+      code: editNote.code_snippets?.[0]?.code || "",
+    });
+
+  }, [isEditMode, editNote]);
+
+
 
   useEffect(()=>{
     let activeNote = noteTypes.find((obj)=>obj.id == noteType.id)
@@ -90,39 +125,34 @@ export default function WriteNote() {
 
   /* ====== EVENT HANDLERS ======= */
   // send post request
-  let saveNote = () => {
+ let saveNote = () => {
+  const payload = {
+    username: "vizay",
+    prime_heading: primeHeading,
+    note_type: Number(noteType.id),
+    language: language.id,
+    topic: Number(selectedTopicId),
+    sub_topic: Number(subTopic) || null,
+    custom_topic: customSubTopic,
+    tags: tagList,
+    ...genericNote,
+  };
 
-    console.log("Started Saving")
-
-    console.log("Reached")
-    console.log("tagList type:", typeof tagList)
-    console.log("tagList value:", tagList)
-    console.log("is array?", Array.isArray(tagList))
-    
-
-    let data = {
-      username:'vizay',
-      prime_heading:primeHeading,
-      note_type : Number(noteType.id),
-      language : language.id,
-      topic : Number(selectedTopicId),
-      sub_topic : Number(subTopic),
-      custom_topic : customSubTopic,
-      tags : tagList, // tag array
-      ...genericNote
-    }
-
-    console.log("Table",data)
-    axios.post("http://127.0.0.1:8000/api/notes/",data)
-
-    .then((res)=>{
-      console.log(res.data)
-      localStorage.removeItem("tags")
-      setNoteCreated(true)
-    })
-    .catch((error)=>console.log(error.response.data))
-    
+  if (isEditMode) {
+    // UPDATE
+    axios
+      .put(`http://127.0.0.1:8000/api/update_note/${editNote.id}/`, payload)
+      .then(() => setNoteCreated(true))
+      .catch(err => console.log(err.response?.data));
+  } else {
+    // CREATE
+    axios
+      .post("http://127.0.0.1:8000/api/notes/", payload)
+      .then(() => setNoteCreated(true))
+      .catch(err => console.log(err.response?.data));
   }
+}
+
 
   return (
     <>
@@ -189,6 +219,7 @@ export default function WriteNote() {
                   language={language} 
                   genericNote={genericNote}
                   setGenericNote={setGenericNote}
+                  isEditMode={isEditMode}
 
                   // API
                   saveNote={saveNote}

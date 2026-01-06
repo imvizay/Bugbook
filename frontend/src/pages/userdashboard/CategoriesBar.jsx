@@ -15,11 +15,7 @@ function CategoriesBar({categories,setCategories,selected,setSelected,API_URL}) 
     .catch((error)=>console.log(error.response.data))
   },[])
 
-  useEffect(()=>{
-    let t = setTimeout(() => {
-      axios.get(`${API_URL}/api/user/language/notes/?language=${selected}`)
-    }, 500);
-  },[selected])
+ 
 
   return (
     <aside className="categoriesBar">
@@ -35,9 +31,9 @@ function CategoriesBar({categories,setCategories,selected,setSelected,API_URL}) 
          {categories?.length > 0 && 
           categories.map((el)=>(
             <span 
-              className={selected == el.language_name ? "activeCategory" : ''} 
+              className={selected == el.id ? "activeCategory" : ''} 
               key={el.id}
-              onClick={()=>setSelected(el.language_name)}
+              onClick={()=>setSelected(el.id)}
               > 
               {el.language_name.toUpperCase()}
             </span>
