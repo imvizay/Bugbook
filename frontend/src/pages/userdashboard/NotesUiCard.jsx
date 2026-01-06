@@ -1,67 +1,32 @@
 import React, { useState } from "react"
-import { Clock, Tag, Code2, Layers, ChevronDown } from "lucide-react"
+import { Clock, Tag, Code2,  ChevronDown } from "lucide-react"
 import "../../assets/styles/userdashboard/notes_card.css"
+import { useNavigate } from "react-router-dom";
 
-const cardDetail = [
-  {
-    id: 1,
-    category: "Frontend",
-    language: "JavaScript",
-    topic: "Variables & Data Types",
-    subtopic: "let vs var vs const",
-    note_type: "Concept",
-    explanation: "Variables store data values used in programs.",
-    reasoning: "Scope and mutability differ between let, var and const.",
-    misconception: "Thinking var is block scoped.",
-    created_at: "2025-07-30T10:22:00",
-  },
-  {
-    id: 2,
-    category: "Backend",
-    language: "JavaScript",
-    topic: "Variables & Data Types",
-    subtopic: "let vs var vs const",
-    note_type: "Concept",
-    explanation: "Variables store data values used in programs.",
-    reasoning: "Scope and mutability differ between let, var and const.",
-    misconception: "Thinking var is block scoped.",
-    created_at: "2025-07-30T10:22:00",
-  },{
-    id: 3,
-    category: "Database",
-    language: "JavaScript",
-    topic: "Variables & Data Types",
-    subtopic: "let vs var vs const",
-    note_type: "Concept",
-    explanation: "Variables store data values used in programs.",
-    reasoning: "Scope and mutability differ between let, var and const.",
-    misconception: "Thinking var is block scoped.",
-    created_at: "2025-07-30T10:22:00",
-  },
-]
-
-function NotesUiCard() {
-  
+function NotesUiCard({notes,onDelete}) {
+  console.log(notes[0])
+  console.log(notes)
+  let navigate = useNavigate()
 
   return (
     <div className="userNoteGrid">
-      {cardDetail.map((el) => {
-        const [openDetails, setDetails] = useState(false)
+      {notes.map((el,index) => {
+         const [openDetails, setDetails] = useState(false)
         return (
-          <div className="noteCard" key={el.id}>
+          <div className="noteCard" key={el?.id}>
             {/* ---------- Header ---------- */}
             <div className="noteHeader">
               <div>
-                <h3 className="noteTitle">{el.topic}</h3>
-                <p className="noteSub">{el.subtopic}</p>
+                <h3 className="noteTitle">{el?.main_topic?.topic_name}</h3>
+                <p className="noteSub">{el?.subtopic}</p>
               </div>
-              <span className="noteCategory">{el.category}</span>
+              <span className="noteCategory">{"id :"} {el?.id}</span>
             </div>
 
             {/* ---------- Meta ---------- */}
             <div className="noteMeta">
-              <span> <Code2 size={14} /> {el.language} </span>
-              <span className="tag"> <Tag size={12} /> {el.note_type} </span>
+              <span> <Code2 size={14} /> {el?.language?.language_name } </span>
+              <span className="tag"> <Tag size={12} /> {el?.note_type?.note_type} </span>
             </div>
 
             {/* ---------- Expand Button ---------- */}
@@ -71,20 +36,31 @@ function NotesUiCard() {
 
             {/* ---------- Details ---------- */}
             {openDetails && (
+              
               <div key={el.id} className="noteDetails">
                 <div>
                   <strong>Explanation</strong>
-                  <p style={{color:"green"}}>{el.explanation}</p>
+                  <p style={{color:"green"}}>{el?.sections?.[0]?.note_explanation || "N/A"}</p>
                 </div>
 
                 <div>
                   <strong>Reasoning</strong>
-                  <p style={{color:"purple"}}>{el.reasoning}</p>
+                  <p style={{color:"purple"}}>{el?.sections?.[0]?.note_reasoning || "N/A"}</p>
                 </div>
 
                 <div>
                   <strong>Misconception</strong>
-                  <p style={{color:"orange"}}>{el.misconception}</p>
+                  <p style={{color:"orange"}}>{el?.sections?.[0]?.note_misconception || "N/A"}</p>
+                </div>
+                <div>
+                  <strong>Code Example</strong>
+                  <p>
+                   {el?.code_snippets?.[0]?.code
+                     ? el.code_snippets[0].code
+                         .split("\n")
+                         .map((line, i) => <span key={i}>{line}<br /></span>)
+                     : "No code example provided while creating this note"}
+                  </p>
                 </div>
               </div>
             )}
@@ -95,6 +71,16 @@ function NotesUiCard() {
                 <Clock size={13} />
                 created  {new Date(el.created_at).toLocaleDateString()}
               </span>
+              <div className="ctaButton">
+                <span className="btn edit" onClick={() =>
+                navigate("/notes", {state: {
+                  mode: "edit",
+                  note: el,
+                },})
+              }
+            >Edit</span>
+                <span onClick={()=>onDelete(el.id)} className="btn delete">Delete</span>
+              </div>
             </div>
           </div>
         )

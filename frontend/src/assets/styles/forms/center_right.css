@@ -14,7 +14,20 @@
   flex-direction: column;
   gap: 6px;
 }
-
+.fieldBlock .title{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: white;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+   color: var(--text-main);
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+  font-weight: 500;
+}
 .fieldBlock label {
   font-size: 14px;
   color: var(--text-main);
@@ -83,6 +96,7 @@
     background-color: red;
    
 }
+
 
 
 /* MEDIA QUERY */

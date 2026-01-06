@@ -14,6 +14,30 @@ from apps.bugbook.models import (
 from rest_framework import serializers
 
 
+class ProgrammingLanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgrammingLanguage
+        fields = ["id", "language_name"]
+
+
+class NoteTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NoteType
+        fields = ["id", "note_type"]
+
+
+class MainTopicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MainTopic
+        fields = ["id", "topic_name"]
+
+
+class SubTopicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubTopic
+        fields = ["id", "sub_topic"]
+
+
 # ---------------- TAG ----------------
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -64,6 +88,7 @@ class NoteCreateSerializer(serializers.Serializer):
     custom_topic = serializers.CharField(required=False, allow_blank=True)
 
     # ---- content ----
+    title = serializers.CharField(required=True,allow_blank=False)
     explanation = serializers.CharField()
     reasoning = serializers.CharField(required=False, allow_blank=True)
     misconception = serializers.CharField(required=False, allow_blank=True)
@@ -111,6 +136,7 @@ class NoteCreateSerializer(serializers.Serializer):
         # --- generic details ---
         GenericDetails.objects.create(
             note=note,
+            title=validated_data["title"],
             note_explanation=validated_data["explanation"],
             note_reasoning=validated_data.get("reasoning", ""),
             note_misconception=validated_data.get("misconception", "")
@@ -165,6 +191,7 @@ class NoteResponseSerializer(serializers.ModelSerializer):
         model = Note
         fields = [
             "id",
+            "title",
             "language",
             "note_type",
             "main_topic",
@@ -192,25 +219,36 @@ class GenericDetailsSerializer(serializers.ModelSerializer):
         model = GenericDetails
         fields = [
             "id",
+            "title",
             "note_explanation",
             "note_reasoning",
             "note_misconception",
         ]
 
 class CodeSnippetSerializer(serializers.ModelSerializer):
+    language = ProgrammingLanguageSerializer(read_only=True)
     class Meta:
         model = CodeSnippet
         fields = ["id", "code", "language"]
 
 
 class NoteDetailSerializer(serializers.ModelSerializer):
+
+    language = ProgrammingLanguageSerializer(read_only=True)
+    note_type = NoteTypeSerializer(read_only=True)
+    main_topic = MainTopicSerializer(read_only=True)
+    sub_topic = SubTopicSerializer(read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
+
     sections = GenericDetailsSerializer(many=True, read_only=True)
     code_snippets = CodeSnippetSerializer(many=True, read_only=True)
+    title = serializers.CharField(read_only=True)
 
     class Meta:
         model = Note
         fields = [
             "id",
+            "title",
             "language",
             "note_type",
             "main_topic",

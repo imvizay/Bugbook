@@ -146,6 +146,7 @@ class GenericDetails(models.Model):
     ]
     
     note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='sections')
+    title = models.CharField(max_length=100,blank=False,null=True ,help_text="Provide title for the note")
     note_explanation = models.CharField(max_length=500,blank=False,null=False)
     note_reasoning = models.CharField(max_length=500,blank=True,null=True)
     note_misconception = models.CharField(max_length=500,blank=True,null=True)

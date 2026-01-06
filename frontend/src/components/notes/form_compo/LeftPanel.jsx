@@ -3,11 +3,10 @@ import '../../../assets/styles/forms/center_left.css'
 
 import { pythonTopics } from '../../../utils/python-topics'
 // import { javascriptTopics } from '../../../utils/javascript-topics' //
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTopic } from '../../../contexts/TopicContext'
 import axios from 'axios'
 
-import { useTags } from '../../../hooks/Tag'
 import { X } from 'lucide-react'
 
 export default function CenterLeft(
@@ -114,7 +113,7 @@ export default function CenterLeft(
               style = {customSubTopic != "" ? {background:'blue',color:'white'}:{pointerEvents:"none",userSelect:"none"}}
               
               onClick={()=>addCustomTopic(selectedTopicId,customSubTopic)}
-              >Add Topic</span>
+              >Add Custom Sub Topic</span>
             </div>
         </div>
 
@@ -122,6 +121,7 @@ export default function CenterLeft(
 
            {/* Tags List */}
            <div className="tagList">
+            <span>TAGS : </span> 
              {tagList.map((el, index) => (
                <span className="tagChip" key={index}>
                  {el}

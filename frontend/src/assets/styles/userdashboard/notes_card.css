@@ -109,8 +109,27 @@
   margin-top: auto;
   font-size: 12px;
   color: #888;
+  display: flex;
+  justify-content: space-between;
+}
+.noteFooter .ctaButton{
+  display: flex;
+  gap: 20px;
 }
 
+.noteFooter .ctaButton .btn{
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.noteFooter .ctaButton .edit{
+  color:green;
+  border: 1px solid green;
+
+}
+.noteFooter .ctaButton .delete{
+  color: red;
+  border:1px solid red;
+}
 .time {
   display: flex;
   align-items: center;

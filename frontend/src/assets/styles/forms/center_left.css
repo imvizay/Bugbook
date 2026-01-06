@@ -58,7 +58,11 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+.status-options input{
+  padding: 5px 10px;
 
+  outline: none;
+}
 .status-options span {
   padding: 6px 14px;
   font-size: 13px;
@@ -83,6 +87,7 @@
 /* Tags Design */
 .tagList {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
 }
