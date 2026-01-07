@@ -6,8 +6,12 @@ import gsap from "gsap"
 import { useEffect, useRef } from 'react'
 import { useNavigate,Link } from 'react-router-dom'
 
+import { useAuth } from '../contexts/UserContext'
 
 export default function BaseLayout() {
+
+  let { user,handleLogout } = useAuth()
+
   let navigate = useNavigate()
   let bugRef = useRef(null)
   let kRef = useRef(null)
@@ -77,10 +81,20 @@ export default function BaseLayout() {
           </div>
 
           <nav className="topActions">
-            <button className="ghostBtn"><Moon size={18} /></button>
-            <Link to="login-acc"><span><LogIn/></span></Link>
-            <button onClick={()=>navigate("my-dashboard")} className="ghostBtn"><User size={18} /></button>
+            <button className="ghostBtn"> <Moon size={18} /> </button>
+            {!user ? (
+              <Link to="login-acc" className="ghostBtn">
+                <LogIn size={18} />
+              </Link>
+            ) : (
+              <>
+                <button onClick={() => navigate("my-dashboard")} className="ghostBtn">   <User size={18} /> </button>
+            
+                <button onClick={()=>handleLogout()} className="ghostBtn" > Logout </button>
+              </>
+            )}
           </nav>
+          
         </header>
 
         {/* MAIN */}
