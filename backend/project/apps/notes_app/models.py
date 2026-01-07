@@ -1,6 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User # django custom user model
 
+<<<<<<< Updated upstream:backend/project/apps/notes_app/models.py
+=======
+
+
+
+>>>>>>> Stashed changes:backend/project/apps/bugbook/models.py
 # ==================== CORE MODELS ====================
 class ProgrammingLanguage(models.Model):
     """Supported programming languages"""
